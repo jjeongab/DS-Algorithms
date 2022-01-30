@@ -1,0 +1,130 @@
+#Reference mainly on Leetcode problems.
+#Designing functions for linked list mainly on my original idea with the explanation to each line of code.  
+
+struct Node
+{
+    int val;
+    Node* next;
+}; //making nodes for linked list 
+
+class MyLinkedList {
+private: // private members can be modified and accessed within the class. 
+    Node* head = NULL;
+    Node* tail = NULL;
+public:  // can be accessed outside the class but not outside the program.
+    MyLinkedList() {
+        
+    }
+    int node_length(Node* head) //retrieving the numbers of nodes in linked list (single). 
+    {
+        int n = 0;
+        while(head)
+        {
+            head = head->next;
+            n++;
+        }
+        return n;
+    }
+    int get(int index) {
+        Node* curr = head;
+        if(!curr)
+        {
+            return -1;
+        }
+        for(int i = 0; i < index; i++)
+        {
+            curr = curr->next ? curr->next : NULL;
+            if(!curr)
+            {
+                break;
+            }
+        }
+        return curr ? curr->val: -1;
+    } // passed 
+    
+    void addAtHead(int val) {
+        Node* temp = new Node();
+        temp->val = val;
+        temp->next = nullptr;
+        if(!head)
+        {
+            head = temp;
+            return;
+        }
+        temp->next = head;
+        head = temp;
+    } // passed 
+    
+    void addAtTail(int val) {
+        Node* temp = new Node();
+        temp->val = val;
+        temp->next = nullptr;
+        if(!head) // empty linked list
+        {
+            tail = temp;
+            head = temp;
+            return;
+        }
+        Node* search = head;
+        while(search->next)
+        {
+            search = search->next;
+        }
+        search->next = temp;
+        tail = temp;
+        
+    }
+    
+    void addAtIndex(int index, int val) {
+        Node* add_node = new Node();
+        add_node->val = val;
+        Node* prev = new Node();
+        Node* curr = head;
+        if(node_length(head) < index)
+        {
+            return;
+        }
+        if(!head && index == 0)
+        {
+            head = add_node;
+            return;
+        }
+        if(head && index == 0)
+        {
+            add_node->next = head;
+            head = add_node;
+            return;
+        }
+        
+        for(int i = 0; i < index; i++)
+        {
+            prev = curr;
+            curr = curr->next;
+        }
+        add_node->next = curr;
+        prev->next = add_node;   
+    }
+    void deleteAtIndex(int index) {
+        Node* prev = new Node();
+        Node* curr = head;
+        if(index == 0 && head)
+        {
+            head = head->next;
+            curr = nullptr;
+            delete(curr);
+            return;
+        }
+        for(int i = 0; i < index; i++)
+        {
+            prev = curr;
+            curr = curr->next;
+            if(!curr)
+            {
+                return;
+            }
+        }
+        prev->next = curr->next;
+        curr->next = nullptr;
+        delete(curr);
+    }
+};
