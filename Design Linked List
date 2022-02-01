@@ -45,62 +45,63 @@ public:  // can be accessed outside the class but not outside the program.
     void addAtHead(int val) {
         Node* temp = new Node();
         temp->val = val;
-        temp->next = nullptr;
-        if(!head)
+        temp->next = nullptr; // forming a node for head
+        if(!head) // if head does not exist(no node on linked list), head points the temp.
         {
             head = temp;
             return;
         }
-        temp->next = head;
-        head = temp;
+        //else
+        temp->next = head; //  Node should point the header 
+        head = temp; // head should move to temp node 
     } // passed 
     
     void addAtTail(int val) {
         Node* temp = new Node();
         temp->val = val;
-        temp->next = nullptr;
+        temp->next = nullptr; // creating node for tail nodes
         if(!head) // empty linked list
         {
             tail = temp;
             head = temp;
             return;
         }
-        Node* search = head;
+        Node* search = head; // search for the tail node in single linked list
         while(search->next)
         {
             search = search->next;
-        }
-        search->next = temp;
-        tail = temp;
+        } // if search reaches the tail Node
+        search->next = temp; // tail node's pointer points the temp node 
+        tail = temp; // tail points the temp 
         
     }
     
     void addAtIndex(int index, int val) {
-        Node* add_node = new Node();
-        add_node->val = val;
-        Node* prev = new Node();
-        Node* curr = head;
+        Node* add_node = new Node(); 
+        add_node->val = val; // creating nodes for certain index 
+        Node* prev = new Node();  // Pointing node that is behind the indexed node 
+        Node* curr = head; // pointing the current node(node at the index)
         if(node_length(head) < index)
         {
-            return;
-        }
+            return; 
+        } // if index is beyond the total length of linked list, should not be added.
         if(!head && index == 0)
         {
             head = add_node;
             return;
-        }
+        } //if no head and index is 0, should add head instead of tail 
         if(head && index == 0)
         {
             add_node->next = head;
             head = add_node;
             return;
-        }
+        }// if head exists, the node should be added before head and added node should be pointed as head.
         
         for(int i = 0; i < index; i++)
         {
             prev = curr;
             curr = curr->next;
-        }
+        } // looping through to find the node of certain index 
         add_node->next = curr;
         prev->next = add_node;   
     }
@@ -113,7 +114,7 @@ public:  // can be accessed outside the class but not outside the program.
             curr = nullptr;
             delete(curr);
             return;
-        }
+        } // 
         for(int i = 0; i < index; i++)
         {
             prev = curr;
