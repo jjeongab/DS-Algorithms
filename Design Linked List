@@ -77,7 +77,7 @@ public:  // can be accessed outside the class but not outside the program.
     }
     
     void addAtIndex(int index, int val) {
-        Node* add_node = new Node(); 
+        Node* add_node = new Node();  
         add_node->val = val; // creating nodes for certain index 
         Node* prev = new Node();  // Pointing node that is behind the indexed node 
         Node* curr = head; // pointing the current node(node at the index)
@@ -106,8 +106,8 @@ public:  // can be accessed outside the class but not outside the program.
         prev->next = add_node;   
     }
     void deleteAtIndex(int index) {
-        Node* prev = new Node();
-        Node* curr = head;
+        Node* prev = new Node(); // prev to find the node before the indexed node 
+        Node* curr = head; // pointing the indexed node 
         if(index == 0 && head)
         {
             head = head->next;
@@ -122,8 +122,8 @@ public:  // can be accessed outside the class but not outside the program.
             if(!curr)
             {
                 return;
-            }
-        }
+            } // if index is beyong the lenght of linked list 
+        } 
         prev->next = curr->next;
         curr->next = nullptr;
         delete(curr);
