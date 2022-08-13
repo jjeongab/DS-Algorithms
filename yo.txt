@@ -1,0 +1,5 @@
+#!/bin/bash
+phrase="Hello to you!"
+echo $phrase
+echo "Hello Codecademy!"
+What the fuck
